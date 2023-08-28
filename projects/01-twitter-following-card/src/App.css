@@ -1,0 +1,105 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui;
+}
+
+.app {
+  background-color: #222;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tw-recomended {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  justify-content: center;
+  background-color: aliceblue;
+  border-radius: 1rem;
+}
+
+.tw-recomended-title {
+  padding: 1rem;
+  padding-left: 0;
+}
+
+.tw-recomended-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tw-recomended-card {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.tw-infocard-header {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid red;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.tw-infocard-name {
+  border-bottom: 2px solid transparent;
+  width: fit-content;
+  line-height: 16px;
+}
+.tw-infocard-name:hover {
+  border-bottom: 2px solid #222;
+}
+.tw-infocard-user {
+  font-size: 14px;
+}
+
+.tw-infocard-header div {
+  width: 100%;
+  display: flex;
+  line-height: 1;
+  flex-direction: column;
+}
+
+.tw-recomended-card aside {
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+
+.tw-follow-btn {
+  width: 100%;
+  max-width: 80px;
+  margin: auto;
+  padding: 0.5rem 0.8rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #111;
+  color: #fff;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+}
+
+.tw-follow-btn:hover {
+  background-color: #525252;
+}
+
+.tw-recomended-card img {
+  border-radius: 60%;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
