@@ -1,44 +1,20 @@
 import { useState } from "react";
-
-const TURNS = {
-  X: "x",
-  O: "o",
-};
-
-const WINNERS_COMBOS = [
-  // horizontal
-  [0, 1, 2],
-  [3, 5, 5],
-  [6, 7, 8],
-  // vertical
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  // Diagonal
-  [0, 4, 8],
-  [2, 4, 6],
-];
+import confetti from "canvas-confetti";
+import { Square } from "./components/Square";
+import { TURNS, WINNERS_COMBOS } from "./constantes.js";
+import { WinnerModal } from "./components/WinnerModal";
 
 // eslint-disable-next-line react/prop-types
-const Square = ({ children, isSelected, updateBoard, index }) => {
-  const handleClick = () => {
-    updateBoard(index);
-  };
-  return (
-    <div
-      onClick={handleClick}
-      className={`square ${!isSelected || "is-selected"}`}
-    >
-      {children}
-    </div>
-  );
-};
 
 function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [winner, setWinner] = useState(null);
 
   const [turn, setTurn] = useState(TURNS.X);
+
+  const checkEndGame = (newBoard) => {
+    return newBoard.every((square) => square !== null);
+  };
 
   const updateBoard = (index) => {
     if (board[index]) return;
@@ -49,12 +25,28 @@ function App() {
     newBoard[index] = turn;
     setBoard(newBoard);
 
+    // Verificar empate
+    checkEndGame(newBoard);
+
     // Verificar ganador
     checkWinner(newBoard);
 
     // Cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
+
+    const newWinner = checkWinner(newBoard);
+    if (newWinner) {
+      setWinner(newWinner);
+    } else if (checkEndGame(newBoard)) {
+      setWinner(false);
+    }
+  };
+
+  const resetGame = () => {
+    setTurn(TURNS.X);
+    setWinner(null);
+    setBoard(Array(9).fill(null));
   };
 
   const checkWinner = (boardToCheck) => {
@@ -68,7 +60,7 @@ function App() {
         boardToCheck[a] === boardToCheck[c]
       ) {
         setWinner(boardToCheck[a]);
-        console.log(winner);
+        confetti();
       }
     }
     // Devuelve null si no hay ganador
@@ -78,7 +70,7 @@ function App() {
   return (
     <main className="board">
       <h1>TIC TAC TOE</h1>
-
+      <button onClick={resetGame}>Reiniciar juego</button>
       <section className="game">
         {board.map((_, index) => {
           return (
@@ -93,6 +85,8 @@ function App() {
         <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
+
+      <WinnerModal winner={winner} resetGame={resetGame} />
     </main>
   );
 }
