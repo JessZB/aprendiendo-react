@@ -3,14 +3,23 @@ import confetti from "canvas-confetti";
 import { Square } from "./components/Square";
 import { TURNS, WINNERS_COMBOS } from "./constantes.js";
 import { WinnerModal } from "./components/WinnerModal";
+import { resetGameToStorage, saveGameToStorage } from "./logic/storage";
 
 // eslint-disable-next-line react/prop-types
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem("board");
+    return boardFromStorage
+      ? JSON.parse(window.localStorage.getItem("board"))
+      : Array(9).fill(null);
+  });
   const [winner, setWinner] = useState(null);
 
-  const [turn, setTurn] = useState(TURNS.X);
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem("turn");
+    return turnFromStorage ? window.localStorage.getItem("turn") : TURNS.X;
+  });
 
   const checkEndGame = (newBoard) => {
     return newBoard.every((square) => square !== null);
@@ -23,6 +32,14 @@ function App() {
     // Actualizar el tablero
     const newBoard = [...board];
     newBoard[index] = turn;
+
+    // Cambiar el turno
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
+    setTurn(newTurn);
+
+    // Guardar cambios de la partida
+    console.log(newBoard, newTurn);
+    saveGameToStorage({ newBoard, newTurn });
     setBoard(newBoard);
 
     // Verificar empate
@@ -30,11 +47,6 @@ function App() {
 
     // Verificar ganador
     checkWinner(newBoard);
-
-    // Cambiar el turno
-    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
-    setTurn(newTurn);
-
     const newWinner = checkWinner(newBoard);
     if (newWinner) {
       setWinner(newWinner);
@@ -47,6 +59,9 @@ function App() {
     setTurn(TURNS.X);
     setWinner(null);
     setBoard(Array(9).fill(null));
+
+    // Eliminar datos guardados
+    resetGameToStorage();
   };
 
   const checkWinner = (boardToCheck) => {
