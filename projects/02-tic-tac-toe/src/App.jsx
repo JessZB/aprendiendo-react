@@ -5,8 +5,6 @@ import { TURNS, WINNERS_COMBOS } from "./constantes.js";
 import { WinnerModal } from "./components/WinnerModal";
 import { resetGameToStorage, saveGameToStorage } from "./logic/storage";
 
-// eslint-disable-next-line react/prop-types
-
 function App() {
   const [board, setBoard] = useState(() => {
     const boardFromStorage = window.localStorage.getItem("board");
