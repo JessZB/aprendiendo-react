@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 
-function App() {
-  const [enabled, setEnabled] = useState(false);
+const FollowMouse = () => {
   const [pointerPosition, setPointerPosition] = useState({
     x: 0,
     y: 0,
   });
-
+  const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     const handleMove = (e) => {
       const { clientX, clientY } = e;
@@ -19,12 +18,16 @@ function App() {
         handleMove(e);
       });
     }
-    return () => window.removeEventListener("pointermove", handleMove);
+    console.log("efecto");
+    return () => {
+      // cleanup
+      console.log("cleanup");
+      window.removeEventListener("pointermove", handleMove);
+    };
   }, [enabled]);
 
   return (
     <>
-      <h3>Proyecto 3</h3>
       <div
         style={{
           transform: `translate(${pointerPosition.x}px, ${pointerPosition.y}px)`,
@@ -34,6 +37,17 @@ function App() {
       <button onClick={() => setEnabled(!enabled)}>
         {enabled ? "Desactivar" : "Activar"}
       </button>
+    </>
+  );
+};
+
+function App() {
+  const [mounted, setMounted] = useState(false);
+  return (
+    <>
+      <h3>Proyecto 3</h3>
+      {mounted && <FollowMouse />}
+      <button onClick={() => !setMounted(!mounted)}>Toggle FollowMouse</button>
     </>
   );
 }
