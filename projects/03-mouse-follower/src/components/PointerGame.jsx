@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CountDown } from "./CountDown";
 import { RandomPoint } from "./RandomPoint";
 
@@ -8,15 +8,21 @@ const GAME_PHASE = {
 };
 
 export const PointerGame = () => {
-  const [pointCoords, setPointCoords] = useState({ x: 0, y: 0 });
+  const [pointCoords, setPointCoords] = useState({ x: 50, y: 50 });
   const [points, setPoints] = useState(0);
 
   const touchPoint = () => {
-    const randomCoordX = Math.random() * 100 - 10;
-    const randomCoordY = Math.random() * 100 - 10;
-    setPointCoords({ x: randomCoordX, y: randomCoordY });
+    setPointCoords({ x: Math.random() * 100, y: Math.random() * 100 });
     setPoints(points + 1);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPointCoords({ x: Math.random() * 100, y: Math.random() * 100 });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [points]);
   return (
     <div>
       <h1>PointerGame</h1>
