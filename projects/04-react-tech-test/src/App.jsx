@@ -1,10 +1,11 @@
-import { FactCard } from "../components/FactCard";
+import { FactCard } from "./components/FactCard";
+import "./style.css";
 
 export function App() {
   return (
-    <div>
-      <h1>Lista de hechos sobre gatos :D</h1>
+    <main className="app-container">
+      <h1>¡Hechos aleatorios de perros!</h1>
       <FactCard />
-    </div>
+    </main>
   );
 }
