@@ -57,21 +57,19 @@ export const FactCard = () => {
 
   return (
     <article className="dog-fact-article">
-      <SelectTypeDog handleChange={handleChange} typesDog={typesDog} />
       <div className="dog-fact-container">
-        {dogImage ? (
-          <img
-            className="dog-image"
-            onError={handleOnError}
-            style={{ width: "150px" }}
-            src={dogImage}
-          />
-        ) : (
-          <Loader />
-        )}
-        <div className="dog-fact-info"></div>
-        <span className="dog-fact">{fact && fact}</span>
-        <button onClick={() => getDogFact()}>RANDOM FACT!</button>
+        <div>
+          <SelectTypeDog handleChange={handleChange} typesDog={typesDog} />
+          {dogImage ? (
+            <img className="dog-image" onError={handleOnError} src={dogImage} />
+          ) : (
+            <Loader />
+          )}
+        </div>
+        <div className="dog-fact-info">
+          <div className="dog-fact">{fact && fact}</div>
+          <button onClick={() => getDogFact()}>RANDOM FACT!</button>
+        </div>
       </div>
     </article>
   );
