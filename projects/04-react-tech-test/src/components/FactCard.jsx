@@ -7,12 +7,15 @@ const DOG_ENPOINT_RANDOM_FACT = "https://dog-api.kinduff.com/api/facts";
 const DOG_RACE_LIST = "https://dog.ceo/api/breeds/list/all";
 
 export const FactCard = () => {
-  const [fact, setFact] = useState("Lorem Ipsum cat fact whatever");
+  const [fact, setFact] = useState(
+    "Presiona el botón para elegir recibir un hecho aleatorio!"
+  );
   const [dogImage, setDogImage] = useState("");
   const [typesDog, setTypesDog] = useState([]);
   const [dogSelected, setDogSelected] = useState("");
 
   const getDogFact = async () => {
+    setFact("");
     let res = await fetch(DOG_ENPOINT_RANDOM_FACT);
     let data = await res.json();
     setFact(data.facts[0]);
@@ -58,17 +61,22 @@ export const FactCard = () => {
   return (
     <article className="dog-fact-article">
       <div className="dog-fact-container">
-        <div>
-          <SelectTypeDog handleChange={handleChange} typesDog={typesDog} />
+        <div className="dog-picture-select">
           {dogImage ? (
             <img className="dog-image" onError={handleOnError} src={dogImage} />
           ) : (
             <Loader />
           )}
+          <SelectTypeDog handleChange={handleChange} typesDog={typesDog} />
         </div>
         <div className="dog-fact-info">
-          <div className="dog-fact">{fact && fact}</div>
-          <button onClick={() => getDogFact()}>RANDOM FACT!</button>
+          <div className="dog-fact ">
+            {fact && <span className="entrada-con-animacion">{fact}</span>}
+          </div>
+          <div className="random-fact-btn" onClick={() => getDogFact()}>
+            <img src="dogpaw.svg" className="on-touch-rotate" alt="dog paw" />
+            <span>RANDOM FACT!</span>
+          </div>
         </div>
       </div>
     </article>

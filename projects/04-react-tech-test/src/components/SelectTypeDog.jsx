@@ -1,3 +1,5 @@
+import "./SelectTypeDog.css";
+
 export const SelectTypeDog = ({ typesDog, handleChange }) => {
   const renderSelectList = () => {
     if (!typesDog) return;
@@ -11,7 +13,12 @@ export const SelectTypeDog = ({ typesDog, handleChange }) => {
     });
   };
   return (
-    <select onChange={handleChange} name="dogType" id="">
+    <select
+      className="dog-select-type"
+      onChange={handleChange}
+      name="dogType"
+      id=""
+    >
       {renderSelectList()}
     </select>
   );

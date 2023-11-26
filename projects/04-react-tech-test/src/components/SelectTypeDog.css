@@ -1,0 +1,18 @@
+.dog-select-type {
+  outline: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--fuchsia-blue-100);
+  color: var(--fuchsia-blue-800);
+  text-align: center;
+  cursor: pointer;
+  border: 3px solid var(--fuchsia-blue-300);
+  border-radius: 8px;
+}
+
+.dog-select-type:hover,
+.dog-select-type:hover:focus {
+  border: 3px solid var(--fuchsia-blue-800);
+}

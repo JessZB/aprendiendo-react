@@ -57,12 +57,24 @@ body {
   padding: 2rem;
 }
 
-h1 {
-  font-size: 2em;
-  line-height: 1.1;
-  text-align: center;
+.fact-card-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
 }
-
+.fact-card-header h1 {
+  font-size: 2em;
+  line-height: 1;
+  text-align: center;
+  width: 100%;
+}
+.fact-card-header img {
+  height: 100%;
+  width: 40px;
+}
+.fact-card-header img:nth-child(3) {
+  transform: scaleX(-1);
+}
 .app-container {
   width: 100%;
   max-width: 600px;
@@ -79,12 +91,20 @@ h1 {
   gap: 1rem;
 }
 
+.dog-picture-select {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .dog-image {
   height: 250px;
   width: 100%;
   max-width: 300px;
   margin: auto;
   object-fit: cover;
+  object-position: center;
   border-radius: 1rem;
 }
 
@@ -98,12 +118,14 @@ h1 {
 }
 .dog-fact {
   height: 100px;
-  font-size: 1em;
+  font-size: 1.1em;
   overflow-y: auto;
 }
 
-button {
-  width: 200px;
+.random-fact-btn {
+  display: flex;
+  align-items: center;
+  width: 250px;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -112,14 +134,73 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
+  text-transform: uppercase;
   transition: border-color 0.25s;
 }
-button:hover {
+
+.random-fact-btn:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
+
+.random-fact-btn:focus,
+.random-fact-btn:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* texto el boton random fact */
+
+.random-fact-btn span {
+  width: 100%;
+  font-size: 1.1em;
+  text-align: center;
+  color: var(--fuchsia-blue-200);
+}
+
+/* IMAGEN DEL BOTON RANDOM FACT */
+
+.random-fact-btn img {
+  width: 20%;
+  transition: transform 0.5s ease;
+}
+.random-fact-btn:hover img {
+  transform: rotate(360deg);
+}
+.random-fact-btn:active img {
+  transition: transform 0.1s ease;
+  transform: scale(0.5);
+}
+
+.entrada-con-animacion {
+  opacity: 0; /* Inicialmente invisible */
+  transform: translateY(20px); /* Desplazado hacia abajo */
+  animation: entradaAnimacion 1s forwards; /* Nombre de la animación y duración */
+}
+
+.on-touch-rotate:focus {
+  animation: rotarAlTocar 1s forwards;
+}
+
+@keyframes entradaAnimacion {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotarAlTocar {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (prefers-color-scheme: light) {
