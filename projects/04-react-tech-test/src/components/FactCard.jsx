@@ -3,13 +3,36 @@ import { SelectTypeDog } from "./SelectTypeDog";
 import { Loader } from "./Loader";
 import { getDogFact, getDogRaceList, getRandomImage } from "../services/facts";
 
+function useImageUrl({ dogSelected }) {
+  const [dogImage, setDogImage] = useState("");
+
+  useEffect(() => {
+    const getDogImage = async () => {
+      let url = `https://dog.ceo/api/breed/${dogSelected}/images/random`;
+
+      let res = await fetch(url);
+      let data = await res.json();
+      setDogImage(data.message);
+    };
+    try {
+      getDogImage();
+    } catch (e) {
+      console.error(e);
+    }
+  }, [dogSelected]);
+
+  return { dogImage, setDogImage };
+}
+
 export const FactCard = () => {
   const [fact, setFact] = useState(
     "Presiona el botón para elegir recibir un hecho aleatorio!"
   );
-  const [dogImage, setDogImage] = useState("");
-  const [typesDog, setTypesDog] = useState([]);
   const [dogSelected, setDogSelected] = useState("");
+
+  const [typesDog, setTypesDog] = useState([]);
+
+  const { dogImage, setDogImage } = useImageUrl({ dogSelected });
 
   const handleOnError = async (e) => {
     setDogImage(undefined);
@@ -31,21 +54,6 @@ export const FactCard = () => {
     getDogRaceList().then((res) => setTypesDog(res));
     getRandomImage().then((res) => setDogImage(res.message));
   }, []);
-
-  useEffect(() => {
-    try {
-      const getDogImage = async () => {
-        let url = `https://dog.ceo/api/breed/${dogSelected}/images/random`;
-
-        let res = await fetch(url);
-        let data = await res.json();
-        setDogImage(data.message);
-      };
-      getDogImage();
-    } catch (e) {
-      console.error(e);
-    }
-  }, [dogSelected]);
 
   return (
     <article className="dog-fact-article">
