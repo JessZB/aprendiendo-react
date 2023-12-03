@@ -14,6 +14,7 @@ export const SelectTypeDog = ({ typesDog, handleChange }) => {
   };
   return (
     <select
+      data-testid="image-dog-select"
       className="dog-select-type"
       onChange={handleChange}
       name="dogType"

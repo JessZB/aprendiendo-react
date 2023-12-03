@@ -7,9 +7,8 @@ function useImageUrl({ dogSelected }) {
   const [dogImage, setDogImage] = useState("");
 
   useEffect(() => {
+    let url = `https://dog.ceo/api/breed/${dogSelected}/images/random`;
     const getDogImage = async () => {
-      let url = `https://dog.ceo/api/breed/${dogSelected}/images/random`;
-
       let res = await fetch(url);
       let data = await res.json();
       setDogImage(data.message);
@@ -60,7 +59,12 @@ export const FactCard = () => {
       <div className="dog-fact-container">
         <div className="dog-picture-select">
           {dogImage ? (
-            <img className="dog-image" onError={handleOnError} src={dogImage} />
+            <img
+              data-testid="dog-image"
+              className="dog-image"
+              onError={handleOnError}
+              src={dogImage}
+            />
           ) : (
             <Loader />
           )}
@@ -68,11 +72,18 @@ export const FactCard = () => {
         </div>
         <div className="dog-fact-info">
           <div className="dog-fact ">
-            {fact && <span className="entrada-con-animacion">{fact}</span>}
+            {fact && (
+              <span
+                data-testid="fact-dog-span"
+                className="entrada-con-animacion"
+              >
+                {fact}
+              </span>
+            )}
           </div>
           <div className="random-fact-btn" onClick={handleClick}>
             <img src="dogpaw.svg" className="on-touch-rotate" alt="dog paw" />
-            <span>RANDOM FACT!</span>
+            <span data-testid="fact-random-btn">RANDOM FACT!</span>
           </div>
         </div>
       </div>
