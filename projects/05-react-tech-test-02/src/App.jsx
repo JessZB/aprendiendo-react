@@ -1,7 +1,14 @@
 export const App = () => {
   return (
-    <div>
-      <h1>HOLA</h1>
-    </div>
+    <main>
+      <h1>Buscar películas</h1>
+      <input
+        type="text"
+        name="search"
+        id=""
+        placeholder="Avengers, Kingsman..."
+      />
+      <div className="movie-list"></div>
+    </main>
   );
 };
