@@ -1,4 +1,5 @@
-export const showCard = ({ name, id, year, language }) => {
+export const ShowCard = ({ showData }) => {
+  const { id, name, image, year, language } = showData;
   return (
     <li key={id}>
       <h3>{name}</h3>

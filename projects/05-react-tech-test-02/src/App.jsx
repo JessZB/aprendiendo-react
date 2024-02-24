@@ -2,6 +2,7 @@ import "./App.css";
 
 import responseShows from "./api/with-results.json";
 import noResults from "./api/no-results.json";
+import { ShowCard } from "./api/components/showCard";
 
 export const App = () => {
   const hasShows = responseShows?.length > 0;
@@ -26,7 +27,13 @@ export const App = () => {
                   : "404notfound.png";
               const language = el.show.language;
               const year = el.show.premiered;
-              return <showCard />;
+
+              return (
+                <ShowCard
+                  key={id}
+                  showData={{ id, name, image, language, year }}
+                />
+              );
             })
           ) : (
             <p>No se encontraron resultados</p>
