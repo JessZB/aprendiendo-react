@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { Shows } from "./api/components/Shows";
 
-import { useShows } from "./useShows";
-import { useSearch } from "./useSearch";
+import { useShows } from "./hooks/useShows";
+import { useSearch } from "./hooks/useSearch";
 
 export const App = () => {
   const { shows } = useShows();
