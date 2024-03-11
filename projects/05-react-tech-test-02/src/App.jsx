@@ -1,16 +1,16 @@
 import "./App.css";
-import { Shows } from "./api/components/Shows";
+import { Shows } from "./components/Shows";
 
 import { useShows } from "./hooks/useShows";
 import { useSearch } from "./hooks/useSearch";
 
 export const App = () => {
-  const { shows } = useShows();
   const { search, setSearch, error } = useSearch();
+  const { shows, getShows } = useShows({ search });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ search });
+    getShows();
   };
 
   const handleChange = (e) => {

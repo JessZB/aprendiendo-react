@@ -12,5 +12,7 @@ export const NoShowsResult = () => {
 
 export const Shows = ({ shows }) => {
   const hasShows = shows?.length > 0;
-  return <ul>{hasShows ? <ListOfShows shows={shows} /> : NoShowsResult}</ul>;
+  return (
+    <ul>{hasShows ? <ListOfShows shows={shows} /> : <NoShowsResult />}</ul>
+  );
 };
