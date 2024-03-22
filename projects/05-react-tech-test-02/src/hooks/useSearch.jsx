@@ -6,7 +6,6 @@ export function useSearch() {
   const isFirstInput = useRef(true);
 
   useEffect(() => {
-    console.log(isFirstInput);
     if (isFirstInput.current) {
       isFirstInput.current = search === "";
       return;
@@ -15,7 +14,9 @@ export function useSearch() {
       setError("No se puede hacer una búsqueda vacía");
       return;
     }
-
+    if (search.length <= 2) {
+      setError("Introduzca almenos 3 carácteres");
+    }
     setError(null);
   }, [search]);
 

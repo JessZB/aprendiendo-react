@@ -1,4 +1,4 @@
-import { ShowCard } from "./showCard";
+import { ShowCard } from "./ShowCard";
 
 export const ListOfShows = ({ shows }) => {
   return shows.map((show) => {

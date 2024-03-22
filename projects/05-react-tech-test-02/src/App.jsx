@@ -6,10 +6,11 @@ import { useSearch } from "./hooks/useSearch";
 
 export const App = () => {
   const { search, setSearch, error } = useSearch();
-  const { shows, getShows } = useShows({ search });
+  const { shows, getShows, loading } = useShows({ search });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (error) return;
     getShows();
   };
 
@@ -33,7 +34,7 @@ export const App = () => {
         <p>{error}</p>
       </header>
       <main className="show-list">
-        <Shows shows={shows} />
+        {loading ? <p>Cargadooo...</p> : <Shows shows={shows} />}
       </main>
     </div>
   );
