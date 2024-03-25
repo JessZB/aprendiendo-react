@@ -7,3 +7,6 @@
 
 - Los useRef() permite referenciar un elemento del dom o un valor que no es necesario para el renderizado de un componente.
 - Pueden utilizarte para tener unv alro que permanezca durante el ciclo de vida de nuestra aplicación o componente.
+
+* useMemo
+- A diferencia del useEffect, que se ejecuta cuando se monta un componente, cuando se cambian sus dependencias o se desmonta, el useMemo evita que se ejecute una parte del código si no se han cambiando sus dependencias.

@@ -3,10 +3,12 @@ import { Shows } from "./components/Shows";
 
 import { useShows } from "./hooks/useShows";
 import { useSearch } from "./hooks/useSearch";
+import { useState } from "react";
 
 export const App = () => {
+  const [sort, setSort] = useState(false);
   const { search, setSearch, error } = useSearch();
-  const { shows, getShows, loading } = useShows({ search });
+  const { shows, getShows, loading } = useShows({ search, sort });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +20,10 @@ export const App = () => {
     setSearch(e.target.value);
   };
 
+  const handleSort = () => {
+    setSort(!sort);
+  };
+
   return (
     <div className="page">
       <h1>BUSCADOR DE ALGO :D</h1>
@@ -27,8 +33,9 @@ export const App = () => {
             value={search}
             onChange={handleChange}
             type="search"
-            name="query  "
+            name="query"
           />
+          <input type="checkbox" value={sort} onChange={handleSort} />
           <button type="submit">BUSCAR</button>
         </form>
         <p>{error}</p>
