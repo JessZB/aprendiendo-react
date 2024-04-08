@@ -9,4 +9,4 @@
 - Pueden utilizarte para tener unv alro que permanezca durante el ciclo de vida de nuestra aplicación o componente.
 
 * useMemo
-- A diferencia del useEffect, que se ejecuta cuando se monta un componente, cuando se cambian sus dependencias o se desmonta, el useMemo evita que se ejecute una parte del código si no se han cambiando sus dependencias.
+- A diferencia del useEffect, que se ejecuta cuando se monta un componente, cuando se cambian sus dependencias o se desmonta, el useMemo guarda evita que se ejecute una parte del código si no se han cambiando sus dependencias. A su vez, permite guardar la generación de una función entre renderizados, pudiéndose ejecutar dicha función sin problemas

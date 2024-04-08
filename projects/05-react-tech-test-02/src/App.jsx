@@ -3,7 +3,7 @@ import { Shows } from "./components/Shows";
 
 import { useShows } from "./hooks/useShows";
 import { useSearch } from "./hooks/useSearch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const App = () => {
   const [sort, setSort] = useState(false);
@@ -13,7 +13,7 @@ export const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (error) return;
-    getShows();
+    getShows({ search });
   };
 
   const handleChange = (e) => {
@@ -23,6 +23,10 @@ export const App = () => {
   const handleSort = () => {
     setSort(!sort);
   };
+
+  useEffect(() => {
+    console.log("GetShows created");
+  }, [getShows]);
 
   return (
     <div className="page">
