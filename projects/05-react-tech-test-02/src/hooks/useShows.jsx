@@ -1,24 +1,22 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { searchShows } from "../services/shows";
 
-export const useShows = ({ search, sort }) => {
+export const useShows = ({ sort }) => {
   const [shows, setShows] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const getShows = useMemo(() => {
-    return async ({ search }) => {
-      try {
-        setLoading(true);
-        setError(null);
-        let newShows = await searchShows({ search });
-        setShows(newShows);
-      } catch (e) {
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getShows = useCallback(async ({ search }) => {
+    try {
+      setLoading(true);
+      setError(null);
+      let newShows = await searchShows({ search });
+      setShows(newShows);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const sortShows = useMemo(() => {
